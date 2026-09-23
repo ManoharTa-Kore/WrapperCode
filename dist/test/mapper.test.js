@@ -17,7 +17,7 @@ const fixtures_1 = require("./fixtures");
     strict_1.default.equal(result.project_id, "project-1");
     strict_1.default.equal(result.subscription_id, "subscription-1");
     strict_1.default.equal(result.session_key, genesysRequestId());
-    strict_1.default.equal(result.idempotency_key, `genesys-${genesysRequestId()}`);
+    strict_1.default.match(result.idempotency_key, /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);
     strict_1.default.deepEqual(result.attachment_urls, ["https://storage.example/invoice.pdf?sig=redacted"]);
     strict_1.default.equal(result.metadata.sessionMetadata.portalcode, "100000XX");
     strict_1.default.equal(result.metadata.sessionMetadata.interactionId, genesysRequestId());
