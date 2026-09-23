@@ -1,0 +1,33 @@
+{
+  "name": "jio-genesys-agent-wrapper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pilot Azure Functions adapter between Genesys email and the Kore agent platform",
+  "main": "dist/src/functions/*.js",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "prestart": "npm run build",
+    "start": "func start",
+    "check:storage": "tsx scripts/check-storage-access.ts",
+    "test": "tsx --test test/**/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "22": "^0.0.0",
+    "@azure/functions": "^4.7.2",
+    "@azure/identity": "^4.11.1",
+    "@azure/storage-blob": "^12.29.1",
+    "@azure/storage-queue": "^12.28.0",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.17.2",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}

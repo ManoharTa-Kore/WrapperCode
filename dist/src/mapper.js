@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.toAgentRequest = toAgentRequest;
+function toAgentRequest(job, attachments, config) {
+    const input = job.request;
+    return {
+        project_id: config.AGENT_PROJECT_ID,
+        subscription_id: config.AGENT_SUBSCRIPTION_ID,
+        session_key: input.interaction_id,
+        idempotency_key: `genesys-${input.interaction_id}`,
+        message: input.input_content,
+        attachment_urls: attachments.map((attachment) => attachment.url),
+        metadata: {
+            sessionMetadata: {
+                portalcode: input.portalcode,
+                articleCode: input.article_code,
+                interactionId: input.interaction_id,
+                sourceType: input.t2r_type
+            }
+        },
+        interactionContext: {
+            locale: config.DEFAULT_LOCALE,
+            timezone: config.DEFAULT_TIMEZONE
+        }
+    };
+}
+//# sourceMappingURL=mapper.js.map
